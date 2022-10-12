@@ -1,0 +1,21 @@
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+  name: operator-shared-pvc
+  namespace: cp4ba
+  labels:
+    app.kubernetes.io/instance: ibm-dba
+    app.kubernetes.io/managed-by: ibm-dba
+    app.kubernetes.io/name: ibm-dba
+    release: 21.0.3
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ibmc-file-gold-gid
+  resources:
+    requests:
+      storage: 1Gi
+
