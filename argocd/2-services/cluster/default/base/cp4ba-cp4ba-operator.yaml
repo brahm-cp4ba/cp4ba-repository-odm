@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cp4ba-cp4ba-operator
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: cp4ba
+    server: https://kubernetes.default.svc
+  project: 2-services
+  source:
+    path: payload/2-services/namespace/cp4ba/cp4ba-operator
+    repoURL: https://github.com/brahm-cp4ba/cp4ba-repository-odm.git
+    targetRevision: main
+    helm:
+      releaseName: cp4ba-operator
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  ignoreDifferences: []
